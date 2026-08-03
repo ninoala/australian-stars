@@ -1,0 +1,29 @@
+@use '../abstracts/variables' as *;
+
+.faq-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.faq-item {
+    border-bottom: 1px solid $color-border;
+}
+
+.faq-question {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border: 0;
+    background: transparent;
+    color: $color-text;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.faq-answer {
+    padding-bottom: 1.25rem;
+}

@@ -1,0 +1,31 @@
+/*!
+Theme Name: Australian Stars
+Author: Yegor Nino
+Description: Custom WordPress theme for Australian Property Stars.
+Version: 1.0.0
+Text Domain: australian-stars
+*/
+
+@use 'abstracts/functions';
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+
+@use 'base/reset';
+@use 'base/base';
+@use 'base/fonts';
+@use 'base/typography';
+
+@use 'layout/header';
+@use 'layout/navigation';
+@use 'layout/grid';
+@use 'layout/footer';
+
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/forms';
+@use 'components/faq';
+@use 'components/testimonials';
+
+@use 'pages/home';
+@use 'pages/free-quote';
+@use 'pages/service';

@@ -1,0 +1,183 @@
+@use '../abstracts/variables' as *;
+
+#reviews {
+	scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+.testimonials {
+	background-color: $color-background-soft;
+}
+
+.testimonials-slider {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	gap: 1rem;
+	margin-top: 3rem;
+
+	&__viewport {
+		overflow: hidden;
+	}
+
+	&__track {
+		display: flex;
+		gap: 1.5rem;
+		transition: transform 0.4s ease;
+		will-change: transform;
+	}
+
+	&__button {
+		display: grid;
+		place-items: center;
+
+		width: 3rem;
+		height: 3rem;
+		padding: 0;
+
+		color: $color-text;
+		background-color: $color-background;
+		border: 1px solid $color-border;
+		border-radius: 50%;
+
+		font-size: 1.1rem;
+		cursor: pointer;
+
+		box-shadow: 0 0.5rem 1.25rem rgba(24, 32, 44, 0.08);
+
+		transition:
+			transform $transition-default,
+			background-color $transition-default,
+			border-color $transition-default;
+
+		&:hover {
+			transform: translateY(-0.1rem);
+			background-color: $color-background-soft;
+			border-color: rgba(83, 105, 76, 0.35);
+		}
+
+		&:disabled {
+			opacity: 0.45;
+			cursor: default;
+			transform: none;
+		}
+	}
+
+	&__dots {
+		display: flex;
+		justify-content: center;
+		gap: 0.6rem;
+
+		margin-top: 1.5rem;
+	}
+
+	&__dot {
+		width: 0.7rem;
+		height: 0.7rem;
+		padding: 0;
+
+		background-color: rgba(83, 105, 76, 0.22);
+		border: 0;
+		border-radius: 50%;
+
+		cursor: pointer;
+		transition:
+			transform $transition-default,
+			background-color $transition-default;
+
+		&.is-active {
+			background-color: $color-primary;
+			transform: scale(1.1);
+		}
+	}
+}
+
+.testimonial-card {
+	flex: 0 0 calc((100% - 3rem) / 3);
+
+	display: flex;
+	flex-direction: column;
+
+	min-height: 100%;
+	padding: 2rem;
+
+	background-color: $color-background;
+	border: 1px solid $color-border;
+	border-radius: $radius-medium;
+
+	box-shadow: 0 0.75rem 2rem rgba(24, 32, 44, 0.06);
+
+	&__stars {
+		display: flex;
+		gap: 0.2rem;
+
+		margin-bottom: 1rem;
+
+		color: $color-accent;
+		font-size: 1rem;
+	}
+
+	&__quote {
+		flex: 1 1 auto;
+		margin: 0 0 1.5rem;
+
+		p {
+			margin: 0;
+
+			color: $color-text;
+			font-size: 1.05rem;
+			line-height: 1.75;
+		}
+	}
+
+	&__footer {
+		display: grid;
+		gap: 0.25rem;
+	}
+
+	&__name {
+		color: $color-text;
+		font-size: 1rem;
+	}
+
+	&__date {
+		color: $color-text-muted;
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	&__link {
+		margin-top: 0.65rem;
+
+		color: $color-primary;
+		font-weight: 600;
+		text-decoration: none;
+
+		transition: color $transition-default;
+
+		&:hover {
+			color: $color-accent;
+		}
+	}
+}
+
+@media (max-width: 64rem) {
+	.testimonial-card {
+		flex-basis: calc((100% - 1.5rem) / 2);
+	}
+}
+
+@media (max-width: 40rem) {
+	.testimonials-slider {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+
+		&__button {
+			display: none;
+		}
+	}
+
+	.testimonial-card {
+		flex-basis: 100%;
+	}
+}

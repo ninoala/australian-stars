@@ -1,0 +1,24 @@
+@use '../abstracts/variables' as *;
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid $color-border;
+    border-radius: $radius-small;
+    background: #fff;
+    color: $color-text;
+}
+
+textarea {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+.form-placeholder {
+    padding: 1.5rem;
+    border: 1px dashed $color-border;
+    border-radius: $radius-medium;
+    background: #fff;
+}

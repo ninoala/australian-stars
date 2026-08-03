@@ -1,0 +1,653 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+
+.service-page {
+	overflow: hidden;
+}
+
+/* ==================================================
+   SERVICE HERO
+================================================== */
+
+.service-hero {
+	position: relative;
+	overflow: hidden;
+
+	display: grid;
+	align-items: center;
+
+	min-height: clamp(29rem, 54vh, 36rem);
+
+	color: $color-text;
+	background-color: $color-background-soft;
+
+	&__media {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+
+		img {
+			display: block;
+
+			width: 100%;
+			height: 100%;
+
+			object-fit: cover;
+			object-position: 68% center;
+		}
+	}
+
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+
+		background: linear-gradient(
+			90deg,
+			$color-background-soft 0%,
+			$color-background-soft 42%,
+			color.change(
+				$color-background-soft,
+				$alpha: 0.96
+			) 51%,
+			color.change(
+				$color-background-soft,
+				$alpha: 0.72
+			) 63%,
+			color.change(
+				$color-background-soft,
+				$alpha: 0.2
+			) 78%,
+			color.change(
+				$color-background-soft,
+				$alpha: 0
+			) 100%
+		);
+	}
+
+	&__inner {
+		position: relative;
+		z-index: 2;
+
+		width: 100%;
+		padding-block: clamp(3.5rem, 7vw, 5.5rem);
+	}
+
+	&__content {
+		max-width: 39rem;
+		margin-left: clamp(1rem, 4vw, 4rem);
+	}
+
+	&__eyebrow {
+		color: $color-accent;
+	}
+
+	h1 {
+		max-width: 39rem;
+		margin: 0.5rem 0 1.1rem;
+
+		color: $color-text;
+		font-size: clamp(2.5rem, 5vw, 4.25rem);
+		line-height: 1.04;
+		letter-spacing: -0.035em;
+	}
+
+	&__description {
+		max-width: 34rem;
+		margin: 0;
+
+		color: $color-text-muted;
+		font-size: clamp(1rem, 1.4vw, 1.1rem);
+		line-height: 1.7;
+	}
+
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.875rem;
+
+		margin-top: 1.75rem;
+	}
+}
+
+.service-page .button--outline-light {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	min-height: 3.25rem;
+	padding: 0.85rem 1.4rem;
+
+	color: $color-primary;
+	background-color: color.change(
+		$color-background,
+		$alpha: 0.6
+	);
+	border: 1px solid $color-primary;
+	border-radius: $radius-small;
+
+	font-weight: 700;
+	text-align: center;
+	text-decoration: none;
+
+	transition:
+		color $transition-default,
+		background-color $transition-default,
+		transform $transition-default;
+
+	&:hover {
+		transform: translateY(-0.125rem);
+
+		color: $color-background;
+		background-color: $color-primary;
+	}
+
+	&:focus-visible {
+		outline: 0.2rem solid $color-primary;
+		outline-offset: 0.2rem;
+	}
+}
+
+/* ==================================================
+   INTRODUCTION
+================================================== */
+
+.service-intro {
+	background-color: $color-background;
+
+	&__content {
+		max-width: 66rem;
+
+		text-align: center;
+
+		h2 {
+			max-width: 52rem;
+			margin: 0.5rem auto 0;
+
+			color: $color-text;
+			font-size: clamp(2rem, 4vw, 3.25rem);
+			line-height: 1.12;
+			letter-spacing: -0.02em;
+		}
+	}
+
+	&__text {
+		display: grid;
+		gap: 1rem;
+
+		max-width: 58rem;
+		margin: 1.5rem auto 2rem;
+
+		p {
+			margin: 0;
+
+			color: $color-text-muted;
+			font-size: clamp(1rem, 1.4vw, 1.1rem);
+			line-height: 1.8;
+		}
+	}
+}
+
+/* ==================================================
+   WHAT'S INCLUDED
+================================================== */
+
+.service-inclusions {
+	background-color: $color-background-soft;
+
+	.section-heading {
+		max-width: 48rem;
+		margin-inline: auto;
+
+		text-align: center;
+	}
+
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(1.25rem, 3vw, 2rem);
+
+		margin-top: clamp(3.5rem, 7vw, 5rem);
+	}
+}
+
+.service-inclusion-card {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	min-width: 0;
+	padding: 4rem 2rem 2rem;
+
+	text-align: center;
+
+	background-color: $color-background;
+	border: 1px solid $color-border;
+	border-radius: $radius-medium;
+
+	box-shadow: 0 0.75rem 2rem rgba(24, 32, 44, 0.06);
+
+	transition:
+		transform $transition-default,
+		box-shadow $transition-default;
+
+	&:hover {
+		transform: translateY(-0.25rem);
+		box-shadow: 0 1rem 2.5rem rgba(24, 32, 44, 0.1);
+	}
+
+	&__number {
+		position: absolute;
+		top: -2.5rem;
+		left: 50%;
+
+		display: grid;
+		place-items: center;
+
+		width: 5rem;
+		height: 5rem;
+
+		color: $color-background;
+		background-color: $color-primary;
+		border: 0.3rem solid $color-background-soft;
+		border-radius: 50%;
+
+		font-size: 1.5rem;
+		font-weight: 800;
+		line-height: 1;
+
+		box-shadow: 0 0.5rem 1.25rem rgba(24, 32, 44, 0.12);
+
+		transform: translateX(-50%);
+	}
+
+	h3 {
+		margin: 0 0 0.75rem;
+
+		color: $color-text;
+		font-size: clamp(1.25rem, 2vw, 1.55rem);
+		line-height: 1.25;
+	}
+
+	p {
+		margin: 0;
+
+		color: $color-text-muted;
+		line-height: 1.7;
+	}
+}
+
+/* ==================================================
+   BENEFITS
+================================================== */
+
+.service-benefits {
+	background-color: $color-background;
+
+	&__inner {
+		display: grid;
+		grid-template-columns:
+			minmax(0, 0.85fr)
+			minmax(0, 1.15fr);
+		align-items: center;
+		gap: clamp(2.5rem, 7vw, 6rem);
+	}
+
+	&__heading {
+		h2 {
+			max-width: 34rem;
+			margin: 0.5rem 0 0;
+
+			color: $color-text;
+			font-size: clamp(2rem, 4vw, 3.25rem);
+			line-height: 1.12;
+			letter-spacing: -0.02em;
+		}
+	}
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+
+		margin: 0;
+		padding: 0;
+
+		list-style: none;
+
+		li {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.875rem;
+
+			min-width: 0;
+			padding: 1.1rem;
+
+			color: $color-text;
+			background-color: $color-background-soft;
+			border: 1px solid $color-border;
+			border-radius: $radius-small;
+
+			font-weight: 500;
+			line-height: 1.55;
+		}
+
+		span {
+			flex: 0 0 auto;
+
+			display: grid;
+			place-items: center;
+
+			width: 1.75rem;
+			height: 1.75rem;
+			margin-top: 0.05rem;
+
+			color: $color-background;
+			background-color: $color-primary;
+			border-radius: 50%;
+
+			font-size: 0.8rem;
+			font-weight: 800;
+		}
+	}
+}
+
+/* ==================================================
+   FINAL CTA
+================================================== */
+
+.service-cta {
+	padding-top: 0;
+
+	background-color: $color-background;
+
+	&__inner {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 2rem;
+
+		padding: clamp(2rem, 5vw, 3.5rem);
+
+		color: $color-background;
+		background-color: $color-primary;
+		border-radius: $radius-medium;
+
+		&::before,
+		&::after {
+			content: '';
+
+			position: absolute;
+			z-index: -1;
+
+			border-radius: 50%;
+
+			background-color: rgba(255, 255, 255, 0.06);
+
+			pointer-events: none;
+		}
+
+		&::before {
+			top: -10rem;
+			right: 10rem;
+
+			width: 18rem;
+			height: 18rem;
+		}
+
+		&::after {
+			right: -5rem;
+			bottom: -8rem;
+
+			width: 14rem;
+			height: 14rem;
+		}
+	}
+
+	&__content {
+		max-width: 44rem;
+
+		h2 {
+			margin: 0.35rem 0 0.65rem;
+
+			color: inherit;
+			font-size: clamp(1.9rem, 4vw, 2.75rem);
+			line-height: 1.12;
+		}
+
+		> p:last-child {
+			margin: 0;
+
+			color: rgba(255, 255, 255, 0.82);
+			line-height: 1.65;
+		}
+	}
+
+	&__eyebrow {
+		margin: 0;
+
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.11em;
+		text-transform: uppercase;
+	}
+
+	&__button {
+		position: relative;
+		z-index: 1;
+
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		min-width: 12rem;
+		padding: 0.95rem 1.5rem;
+
+		color: $color-text;
+		background-color: $color-background;
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		border-radius: $radius-small;
+
+		font-weight: 700;
+		text-align: center;
+		text-decoration: none;
+
+		box-shadow: 0 0.5rem 1.5rem rgba(24, 32, 44, 0.16);
+
+		transition:
+			transform $transition-default,
+			background-color $transition-default,
+			box-shadow $transition-default;
+
+		&:hover {
+			transform: translateY(-0.15rem);
+
+			background-color: $color-background-soft;
+			box-shadow: 0 0.75rem 1.75rem
+				rgba(24, 32, 44, 0.2);
+		}
+
+		&:focus-visible {
+			outline: 0.2rem solid $color-background;
+			outline-offset: 0.25rem;
+		}
+	}
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 64rem) {
+	.service-hero {
+		min-height: 32rem;
+
+		&__media img {
+			object-position: 72% center;
+		}
+
+		&__overlay {
+			background: linear-gradient(
+				90deg,
+				$color-background-soft 0%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.98
+				) 48%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.82
+				) 64%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.28
+				) 86%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.08
+				) 100%
+			);
+		}
+
+		&__content {
+			margin-left: clamp(0.5rem, 2vw, 1.5rem);
+		}
+	}
+
+	.service-inclusion-card {
+		padding-inline: 1.5rem;
+	}
+
+	.service-benefits {
+		&__inner {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+
+		&__heading {
+			max-width: 42rem;
+		}
+	}
+}
+
+@media (max-width: 48rem) {
+	.service-hero {
+		min-height: 31rem;
+
+		&__media img {
+			object-position: 72% center;
+		}
+
+		&__overlay {
+			background: linear-gradient(
+				90deg,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.98
+				) 0%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.95
+				) 58%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.76
+				) 82%,
+				color.change(
+					$color-background-soft,
+					$alpha: 0.52
+				) 100%
+			);
+		}
+
+		&__content {
+			max-width: 34rem;
+			margin-left: 0;
+		}
+	}
+
+	.service-inclusions__grid {
+		grid-template-columns: 1fr;
+		gap: 4rem;
+	}
+
+	
+	.service-benefits__list {
+		grid-template-columns: 1fr;
+	}
+
+	.service-cta {
+		&__inner {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+
+			text-align: center;
+		}
+
+		&__content {
+			margin-inline: auto;
+		}
+
+		&__button {
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 36rem) {
+	.service-hero {
+		min-height: 35rem;
+
+		&__inner {
+			padding-block: 3.5rem;
+		}
+
+		&__overlay {
+			background-color: color.change(
+				$color-background-soft,
+				$alpha: 0.9
+			);
+			background-image: none;
+		}
+
+		&__actions {
+			flex-direction: column;
+			align-items: stretch;
+
+			.button,
+			.button--outline-light {
+				width: 100%;
+			}
+		}
+	}
+
+	.service-intro {
+		&__content {
+			text-align: left;
+
+			h2 {
+				margin-inline: 0;
+			}
+		}
+
+		&__text {
+			margin-inline: 0;
+		}
+	}
+
+	.service-inclusion-card {
+		padding-inline: 1.25rem;
+	}
+
+	.service-benefits__list li {
+		padding: 1rem;
+	}
+}

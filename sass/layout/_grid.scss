@@ -1,0 +1,21 @@
+@use '../abstracts/mixins' as *;
+
+.card-grid--three,
+.steps-grid {
+    @include tablet {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.split-layout,
+.hero__grid,
+.contact__grid,
+.faq__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+
+    @include desktop {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
