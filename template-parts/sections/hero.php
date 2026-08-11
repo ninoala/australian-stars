@@ -98,15 +98,15 @@
 				</a>
 
 				<a
-					class="hero__phone"
-					href="tel:+61XXXXXXXXX"
+					class="hero__phone button--outline-light"
+					href="tel:+610436341757"
 					aria-label="<?php esc_attr_e(
 						'Call Australian Property Stars',
 						'australian-stars'
 					); ?>"
 				>
 					<?php esc_html_e(
-						'04XX XXX XXX',
+						' Call 0436 341 757',
 						'australian-stars'
 					); ?>
 				</a>

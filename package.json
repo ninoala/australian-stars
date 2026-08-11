@@ -1,10 +1,10 @@
 {
-  "name": "wp-starter-theme",
+  "name": "australian-stars-theme",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "sass": "sass --watch sass/style.scss assets/css/style.css",
-    "build": "sass --style=compressed --no-source-map sass/style.scss assets/css/style.css"
+    "sass": "sass --watch sass/style.scss:style.css --style=expanded --no-source-map",
+    "build": "sass sass/style.scss style.css --style=compressed --no-source-map"
   },
   "devDependencies": {
     "sass": "^1.77.8"

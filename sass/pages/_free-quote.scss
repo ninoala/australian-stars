@@ -9,16 +9,12 @@
 		grid-template-columns:
 			minmax(0, 0.9fr)
 			minmax(28rem, 1.1fr);
-		align-items: stretch;
+		align-items: start;
 		gap: clamp(2.5rem, 6vw, 5rem);
 	}
 
 	&__content {
-		display: flex;
-		flex-direction: column;
-
 		min-width: 0;
-		height: 100%;
 		padding-top: 1rem;
 
 		h1 {
@@ -26,6 +22,7 @@
 			margin: 0.5rem 0 1rem;
 
 			color: $color-text;
+
 			font-size: clamp(2.75rem, 6vw, 4.75rem);
 			line-height: 1.05;
 		}
@@ -36,6 +33,7 @@
 		margin: 0;
 
 		color: $color-text-muted;
+
 		font-size: clamp(1rem, 1.5vw, 1.125rem);
 		line-height: 1.75;
 	}
@@ -43,14 +41,16 @@
 	&__image {
 		position: relative;
 
-		flex: 1 1 30rem;
 		overflow: hidden;
 
 		min-height: clamp(29rem, 37vw, 35rem);
 		margin-top: 2rem;
 
 		border-radius: $radius-medium;
-		box-shadow: 0 1rem 2.5rem rgba(24, 32, 44, 0.1);
+
+		box-shadow:
+			0 1rem 2.5rem
+			rgba(24, 32, 44, 0.1);
 
 		img {
 			position: absolute;
@@ -69,7 +69,8 @@
 
 .quote-contact {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns:
+		repeat(2, minmax(0, 1fr));
 	gap: 1rem;
 
 	margin: 1.5rem 0 0;
@@ -78,31 +79,13 @@
 	list-style: none;
 
 	&__item {
-		display: grid;
-		grid-template-columns: 3rem minmax(0, 1fr);
-		align-items: center;
-		gap: 0.875rem;
-
 		min-width: 0;
-		padding: 0.9rem;
+		padding: 1rem 1.1rem;
 
 		background-color: $color-background;
+
 		border: 1px solid $color-border;
 		border-radius: $radius-small;
-	}
-
-	&__icon {
-		display: grid;
-		place-items: center;
-
-		width: 3rem;
-		height: 3rem;
-
-		color: $color-primary;
-		background-color: $color-background-soft;
-		border-radius: 50%;
-
-		font-size: 1rem;
 	}
 
 	&__content {
@@ -112,9 +95,10 @@
 	&__label {
 		display: block;
 
-		margin-bottom: 0.15rem;
+		margin-bottom: 0.3rem;
 
 		color: $color-text;
+
 		font-size: 0.75rem;
 		font-weight: 700;
 		letter-spacing: 0.06em;
@@ -122,15 +106,16 @@
 	}
 
 	a {
-		display: block;
+		display: inline-block;
 
-		min-width: 0;
+		max-width: 100%;
 
 		color: $color-text-muted;
+
 		font-size: 0.9rem;
 		line-height: 1.45;
 		text-decoration: none;
-		overflow-wrap: anywhere;
+		overflow-wrap: break-word;
 
 		transition: color $transition-default;
 
@@ -139,6 +124,8 @@
 		}
 
 		&:focus-visible {
+			color: $color-primary;
+
 			outline: 0.15rem solid $color-primary;
 			outline-offset: 0.2rem;
 		}
@@ -146,17 +133,24 @@
 }
 
 .quote-form-card {
-	display: flex;
-	flex-direction: column;
+	display: block;
 
-	height: 100%;
+	align-self: start;
+
+	width: 100%;
+	height: auto;
+	min-height: 0;
+
 	padding: clamp(1.5rem, 4vw, 2.5rem);
 
 	background-color: $color-background;
+
 	border: 1px solid $color-border;
 	border-radius: $radius-medium;
 
-	box-shadow: 0 1.25rem 3.5rem rgba(24, 32, 44, 0.1);
+	box-shadow:
+		0 1.25rem 3.5rem
+		rgba(24, 32, 44, 0.1);
 
 	&__heading {
 		margin-bottom: 1.75rem;
@@ -165,6 +159,7 @@
 			margin: 0.35rem 0 0.65rem;
 
 			color: $color-text;
+
 			font-size: clamp(1.8rem, 3vw, 2.5rem);
 			line-height: 1.15;
 		}
@@ -174,6 +169,7 @@
 			margin: 0;
 
 			color: $color-text-muted;
+
 			line-height: 1.65;
 		}
 	}
@@ -181,13 +177,12 @@
 
 .quote-form {
 	display: grid;
-	flex: 1 1 auto;
-	align-content: start;
 	gap: 1rem;
 
 	&__row {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns:
+			repeat(2, minmax(0, 1fr));
 		gap: 1rem;
 	}
 
@@ -201,6 +196,7 @@
 		margin: 0;
 
 		color: $color-text-muted;
+
 		font-size: 0.8rem;
 		line-height: 1.5;
 	}
@@ -212,6 +208,7 @@
 
 	label {
 		color: $color-text;
+
 		font-size: 0.875rem;
 		font-weight: 600;
 
@@ -228,6 +225,7 @@
 
 		color: $color-text;
 		background-color: $color-background-soft;
+
 		border: 1px solid $color-border;
 		border-radius: $radius-small;
 
@@ -240,23 +238,30 @@
 
 		&::placeholder {
 			color: $color-text-muted;
+
 			opacity: 0.7;
 		}
 
 		&:hover {
-			border-color: rgba(83, 105, 76, 0.45);
+			border-color:
+				rgba(83, 105, 76, 0.45);
 		}
 
 		&:focus {
 			background-color: $color-background;
 			border-color: $color-primary;
+
 			outline: none;
-			box-shadow: 0 0 0 0.2rem rgba(83, 105, 76, 0.12);
+
+			box-shadow:
+				0 0 0 0.2rem
+				rgba(83, 105, 76, 0.12);
 		}
 	}
 
 	select {
 		appearance: none;
+
 		padding-right: 2.75rem;
 
 		background-image:
@@ -270,9 +275,11 @@
 				$color-text-muted 50%,
 				transparent 50%
 			);
+
 		background-position:
 			calc(100% - 1.15rem) 50%,
 			calc(100% - 0.85rem) 50%;
+
 		background-repeat: no-repeat;
 		background-size: 0.35rem 0.35rem;
 
@@ -281,6 +288,7 @@
 
 	textarea {
 		min-height: 8rem;
+
 		resize: vertical;
 	}
 }
@@ -321,13 +329,130 @@
 	white-space: nowrap !important;
 }
 
+.quote-whatsapp {
+	display: grid;
+	grid-template-columns:
+		3.75rem
+		minmax(0, 1fr)
+		auto;
+	align-items: center;
+	gap: 1.25rem;
+
+	margin-top: 2rem;
+	padding: 1.35rem 1.5rem;
+
+	background-color: $color-background-soft;
+
+	border: 1px solid rgba(83, 105, 76, 0.25);
+	border-radius: $radius-medium;
+
+	&__icon {
+		display: grid;
+		place-items: center;
+
+		width: 3.75rem;
+		height: 3.75rem;
+
+		color: #25d366;
+		background-color: #eefbf2;
+
+		border: 1px solid rgba(37, 211, 102, 0.2);
+		border-radius: 50%;
+	}
+
+	&__icon-mark {
+		display: block;
+
+		width: 1.75rem;
+		height: 1.75rem;
+
+		background-color: currentColor;
+
+		mask-image:
+			url('assets/images/icons/icon-whatsapp.svg');
+		mask-position: center;
+		mask-repeat: no-repeat;
+		mask-size: contain;
+
+		-webkit-mask-image:
+			url('assets/images/icons/icon-whatsapp.svg');
+		-webkit-mask-position: center;
+		-webkit-mask-repeat: no-repeat;
+		-webkit-mask-size: contain;
+	}
+
+	&__content {
+		min-width: 0;
+	}
+
+	&__title {
+		margin: 0;
+
+		color: $color-text;
+
+		font-size: 1.05rem;
+		font-weight: 700;
+		line-height: 1.35;
+	}
+
+	&__text {
+		margin: 0.3rem 0 0;
+
+		color: $color-text-muted;
+
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	&__link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+
+		min-width: 8.75rem;
+		padding: 0.9rem 1.15rem;
+
+		color: $color-background;
+		background-color: $color-primary;
+
+		border: 1px solid $color-primary;
+		border-radius: $radius-small;
+
+		font-size: 0.9rem;
+		font-weight: 700;
+		line-height: 1.2;
+		text-decoration: none;
+		white-space: nowrap;
+
+		transition:
+			background-color $transition-default,
+			transform $transition-default,
+			box-shadow $transition-default;
+
+		&:hover {
+			transform: translateY(-0.1rem);
+
+			box-shadow:
+				0 0.5rem 1.25rem
+				rgba(24, 32, 44, 0.14);
+		}
+
+		&:focus-visible {
+			outline: 0.15rem solid $color-primary;
+			outline-offset: 0.2rem;
+		}
+	}
+}
+
 .quote-trust {
 	color: $color-background;
 	background-color: $color-primary;
 
 	&__inner {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns:
+			repeat(3, minmax(0, 1fr));
 	}
 
 	&__item {
@@ -344,7 +469,9 @@
 		text-align: center;
 
 		&:not(:last-child) {
-			border-right: 1px solid rgba(255, 255, 255, 0.2);
+			border-right:
+				1px solid
+				rgba(255, 255, 255, 0.2);
 		}
 
 		img {
@@ -366,6 +493,7 @@
 			display: block;
 
 			color: inherit;
+
 			line-height: 1.3;
 		}
 	}
@@ -374,42 +502,35 @@
 @media (max-width: 64rem) {
 	.quote-page {
 		&__grid {
-			grid-template-columns:
-				minmax(0, 0.85fr)
-				minmax(25rem, 1.15fr);
-			gap: 2.5rem;
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+
+		&__content {
+			padding-top: 0;
 		}
 
 		&__image {
-			min-height: 30rem;
+			min-height:
+				clamp(28rem, 60vw, 36rem);
 		}
+	}
+
+	.quote-contact {
+		max-width: none;
+	}
+
+	.quote-form-card {
+		width: 100%;
 	}
 }
 
 @media (max-width: 52rem) {
 	.quote-page {
-		&__grid {
-			grid-template-columns: 1fr;
-		}
-
-		&__content {
-			height: auto;
-			padding-top: 0;
-		}
-
 		&__image {
-			flex: none;
-			min-height: clamp(26rem, 75vw, 34rem);
+			min-height:
+				clamp(26rem, 75vw, 34rem);
 		}
-	}
-
-	.quote-contact {
-		max-width: 40rem;
-	}
-
-	.quote-form-card {
-		width: 100%;
-		height: auto;
 	}
 }
 
@@ -417,8 +538,11 @@
 	.quote-page {
 		padding-top: 2.5rem;
 
-		&__content h1 {
-			font-size: clamp(2.4rem, 12vw, 3.5rem);
+		&__content {
+			h1 {
+				font-size:
+					clamp(2.4rem, 12vw, 3.5rem);
+			}
 		}
 
 		&__image {
@@ -435,8 +559,33 @@
 		grid-template-columns: 1fr;
 	}
 
-	.quote-form__submit {
-		width: 100%;
+	.quote-form {
+		&__submit {
+			width: 100%;
+		}
+	}
+
+	.quote-whatsapp {
+		grid-template-columns:
+			3.5rem
+			minmax(0, 1fr);
+
+		gap: 1rem;
+
+		padding: 1.25rem;
+
+		&__icon {
+			width: 3.5rem;
+			height: 3.5rem;
+		}
+
+		&__link {
+			grid-column: 1 / -1;
+
+			width: 100%;
+			margin-top: 0.25rem;
+			padding-block: 1rem;
+		}
 	}
 
 	.quote-trust {
@@ -449,7 +598,9 @@
 
 			&:not(:last-child) {
 				border-right: 0;
-				border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+				border-bottom:
+					1px solid
+						rgba(255, 255, 255, 0.2);
 			}
 		}
 	}

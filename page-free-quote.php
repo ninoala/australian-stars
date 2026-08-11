@@ -10,7 +10,14 @@ get_header();
 $theme_uri    = get_template_directory_uri();
 $phone_label  = '0436 341 757';
 $phone_number = '+61436341757';
-$email        = get_option( 'admin_email' );
+$email        = 'hello@australianpropertystars.com';
+$whatsapp_number = '61436341757';
+
+$whatsapp_url = 'https://wa.me/' . $whatsapp_number
+	. '?text='
+	. rawurlencode(
+		'Hi Australian Property Stars, I would like to get a free quote.'
+	);
 
 $form_status = isset( $_GET['quote-status'] )
 	? sanitize_key( wp_unslash( $_GET['quote-status'] ) )
@@ -76,13 +83,6 @@ $form_status = isset( $_GET['quote-status'] )
 				<ul class="quote-contact">
 
 					<li class="quote-contact__item">
-						<span
-							class="quote-contact__icon"
-							aria-hidden="true"
-						>
-							<i class="fa-solid fa-phone"></i>
-						</span>
-
 						<div class="quote-contact__content">
 							<span class="quote-contact__label">
 								<?php esc_html_e(
@@ -100,13 +100,6 @@ $form_status = isset( $_GET['quote-status'] )
 					</li>
 
 					<li class="quote-contact__item">
-						<span
-							class="quote-contact__icon"
-							aria-hidden="true"
-						>
-							<i class="fa-regular fa-envelope"></i>
-						</span>
-
 						<div class="quote-contact__content">
 							<span class="quote-contact__label">
 								<?php esc_html_e(
@@ -441,6 +434,53 @@ $form_status = isset( $_GET['quote-status'] )
 					</p>
 
 				</form>
+
+				<div class="quote-whatsapp">
+
+					<div class="quote-whatsapp__icon" aria-hidden="true">
+						<span class="quote-whatsapp__icon-mark"></span>
+					</div>
+	
+
+					<div class="quote-whatsapp__content">
+
+						<p class="quote-whatsapp__title">
+							<?php
+							esc_html_e(
+								'Prefer to message us?',
+								'australian-stars'
+							);
+							?>
+						</p>
+
+						<p class="quote-whatsapp__text">
+							<?php
+							esc_html_e(
+								'Chat with us directly on WhatsApp instead.',
+								'australian-stars'
+							);
+							?>
+						</p>
+
+					</div>
+
+					<a
+						class="quote-whatsapp__link"
+						href="<?php echo esc_url( $whatsapp_url ); ?>"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<?php
+						esc_html_e(
+							'Message Us',
+							'australian-stars'
+						);
+						?>
+
+						<span aria-hidden="true">→</span>
+					</a>
+
+				</div>
 
 			</div>
 

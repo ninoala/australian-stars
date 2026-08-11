@@ -21,7 +21,10 @@ if ( has_custom_logo() ) {
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+	>
 
 	<?php wp_head(); ?>
 </head>
@@ -53,9 +56,20 @@ if ( has_custom_logo() ) {
 			aria-controls="primary-navigation"
 			aria-label="<?php esc_attr_e( 'Open navigation', 'australian-stars' ); ?>"
 		>
-			<span aria-hidden="true"></span>
-			<span aria-hidden="true"></span>
-			<span aria-hidden="true"></span>
+			<span
+				class="nav-toggle__line"
+				aria-hidden="true"
+			></span>
+
+			<span
+				class="nav-toggle__line"
+				aria-hidden="true"
+			></span>
+
+			<span
+				class="nav-toggle__line"
+				aria-hidden="true"
+			></span>
 		</button>
 
 		<nav
@@ -64,6 +78,7 @@ if ( has_custom_logo() ) {
 			aria-label="<?php esc_attr_e( 'Primary navigation', 'australian-stars' ); ?>"
 		>
 			<div class="primary-navigation__drawer-header">
+
 				<div class="primary-navigation__drawer-logo">
 					<?php echo wp_kses_post( $brand_markup ); ?>
 				</div>
@@ -73,9 +88,17 @@ if ( has_custom_logo() ) {
 					type="button"
 					aria-label="<?php esc_attr_e( 'Close navigation', 'australian-stars' ); ?>"
 				>
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
+					<span
+						class="primary-navigation__close-line"
+						aria-hidden="true"
+					></span>
+
+					<span
+						class="primary-navigation__close-line"
+						aria-hidden="true"
+					></span>
 				</button>
+
 			</div>
 
 			<?php
@@ -90,11 +113,12 @@ if ( has_custom_logo() ) {
 			?>
 
 			<a
-				class="primary-navigation__mobile-cta"
+				class="button button--small primary-navigation__cta"
 				href="<?php echo esc_url( home_url( '/free-quote/' ) ); ?>"
 			>
 				<?php esc_html_e( 'Get a Free Quote', 'australian-stars' ); ?>
 			</a>
+
 		</nav>
 
 		<button
@@ -103,13 +127,6 @@ if ( has_custom_logo() ) {
 			tabindex="-1"
 			aria-label="<?php esc_attr_e( 'Close navigation', 'australian-stars' ); ?>"
 		></button>
-
-		<a
-			class="button button--small site-header__cta"
-			href="<?php echo esc_url( home_url( '/free-quote/' ) ); ?>"
-		>
-			<?php esc_html_e( 'Get a Free Quote', 'australian-stars' ); ?>
-		</a>
 
 	</div>
 </header>

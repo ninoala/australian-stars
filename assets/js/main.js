@@ -1,15 +1,27 @@
 /**
- * Mobile slide-out navigation.
+ * Australian Property Stars theme scripts.
  */
+
+/* ==================================================
+   MOBILE NAVIGATION
+================================================== */
+
 const initMobileNavigation = () => {
-	const navToggle = document.querySelector('.nav-toggle');
-	const navigation = document.querySelector(
-		'.primary-navigation'
-	);
-	const closeButton = navigation?.querySelector(
-		'.primary-navigation__close'
-	);
-	const backdrop = document.querySelector('.nav-backdrop');
+	const navToggle =
+		document.querySelector('.nav-toggle');
+
+	const navigation =
+		document.querySelector(
+			'.primary-navigation'
+		);
+
+	const closeButton =
+		navigation?.querySelector(
+			'.primary-navigation__close'
+		);
+
+	const backdrop =
+		document.querySelector('.nav-backdrop');
 
 	if (
 		!navToggle ||
@@ -20,52 +32,96 @@ const initMobileNavigation = () => {
 		return;
 	}
 
-	const mobileBreakpoint = window.matchMedia(
-		'(max-width: 56rem)'
+	const mobileNavigation = window.matchMedia(
+		'(max-width: 79.9375rem)'
 	);
 
-	const focusableSelector = [
-		'a[href]',
-		'button:not([disabled])',
-		'[tabindex]:not([tabindex="-1"])',
-	].join(',');
-
-	const isNavigationOpen = () =>
+	const isOpen = () =>
 		navigation.classList.contains('is-open');
 
+	const setNavigationState = () => {
+		if (mobileNavigation.matches) {
+			if (!isOpen()) {
+				navigation.setAttribute(
+					'aria-hidden',
+					'true'
+				);
+			}
+
+			return;
+		}
+
+		navigation.removeAttribute('aria-hidden');
+		navigation.classList.remove('is-open');
+		backdrop.classList.remove('is-visible');
+		document.body.classList.remove('nav-open');
+
+		navToggle.setAttribute(
+			'aria-expanded',
+			'false'
+		);
+
+		navToggle.setAttribute(
+			'aria-label',
+			'Open navigation'
+		);
+	};
+
 	const openNavigation = () => {
+		if (!mobileNavigation.matches) {
+			return;
+		}
+
 		navigation.classList.add('is-open');
 		backdrop.classList.add('is-visible');
 		document.body.classList.add('nav-open');
 
-		navToggle.setAttribute('aria-expanded', 'true');
+		navigation.setAttribute(
+			'aria-hidden',
+			'false'
+		);
+
+		navToggle.setAttribute(
+			'aria-expanded',
+			'true'
+		);
+
 		navToggle.setAttribute(
 			'aria-label',
 			'Close navigation'
 		);
-
-		navigation.setAttribute('aria-hidden', 'false');
 
 		window.setTimeout(() => {
 			closeButton.focus();
 		}, 100);
 	};
 
-	const closeNavigation = (returnFocus = false) => {
+	const closeNavigation = (
+		returnFocus = false
+	) => {
 		navigation.classList.remove('is-open');
 		backdrop.classList.remove('is-visible');
 		document.body.classList.remove('nav-open');
 
-		navToggle.setAttribute('aria-expanded', 'false');
+		navToggle.setAttribute(
+			'aria-expanded',
+			'false'
+		);
+
 		navToggle.setAttribute(
 			'aria-label',
 			'Open navigation'
 		);
 
-		if (mobileBreakpoint.matches) {
-			navigation.setAttribute('aria-hidden', 'true');
+		if (mobileNavigation.matches) {
+			navigation.setAttribute(
+				'aria-hidden',
+				'true'
+			);
 		} else {
-			navigation.removeAttribute('aria-hidden');
+			navigation.removeAttribute(
+				'aria-hidden'
+			);
 		}
 
 		if (returnFocus) {
@@ -74,7 +130,7 @@ const initMobileNavigation = () => {
 	};
 
 	const toggleNavigation = () => {
-		if (isNavigationOpen()) {
+		if (isOpen()) {
 			closeNavigation();
 			return;
 		}
@@ -82,156 +138,142 @@ const initMobileNavigation = () => {
 		openNavigation();
 	};
 
-	const trapFocus = (event) => {
-		if (
-			event.key !== 'Tab' ||
-			!isNavigationOpen()
-		) {
-			return;
-		}
-
-		const focusableElements = Array.from(
-			navigation.querySelectorAll(focusableSelector)
-		).filter((element) => element.offsetParent !== null);
-
-		if (!focusableElements.length) {
-			return;
-		}
-
-		const firstElement = focusableElements[0];
-		const lastElement =
-			focusableElements[focusableElements.length - 1];
-
-		if (
-			event.shiftKey &&
-			document.activeElement === firstElement
-		) {
-			event.preventDefault();
-			lastElement.focus();
-			return;
-		}
-
-		if (
-			!event.shiftKey &&
-			document.activeElement === lastElement
-		) {
-			event.preventDefault();
-			firstElement.focus();
-		}
-	};
-
-	const handleBreakpointChange = () => {
-		closeNavigation();
-
-		if (mobileBreakpoint.matches) {
-			navigation.setAttribute('aria-hidden', 'true');
-		} else {
-			navigation.removeAttribute('aria-hidden');
-		}
-	};
-
-	navToggle.addEventListener('click', toggleNavigation);
-
-	closeButton.addEventListener('click', () => {
-		closeNavigation(true);
-	});
-
-	backdrop.addEventListener('click', () => {
-		closeNavigation(true);
-	});
-
-	navigation.addEventListener('click', (event) => {
-		if (
-			mobileBreakpoint.matches &&
-			event.target.closest('a')
-		) {
-			closeNavigation();
-		}
-	});
-
-	document.addEventListener('keydown', (event) => {
-		if (
-			event.key === 'Escape' &&
-			isNavigationOpen()
-		) {
-			closeNavigation(true);
-			return;
-		}
-
-		trapFocus(event);
-	});
-
-	mobileBreakpoint.addEventListener(
-		'change',
-		handleBreakpointChange
+	navToggle.addEventListener(
+		'click',
+		toggleNavigation
 	);
 
-	handleBreakpointChange();
+	closeButton.addEventListener(
+		'click',
+		() => {
+			closeNavigation(true);
+		}
+	);
+
+	backdrop.addEventListener(
+		'click',
+		() => {
+			closeNavigation(true);
+		}
+	);
+
+	navigation.addEventListener(
+		'click',
+		(event) => {
+			if (
+				mobileNavigation.matches &&
+				event.target.closest('a')
+			) {
+				closeNavigation();
+			}
+		}
+	);
+
+	document.addEventListener(
+		'keydown',
+		(event) => {
+			if (
+				event.key === 'Escape' &&
+				isOpen()
+			) {
+				closeNavigation(true);
+			}
+		}
+	);
+
+	mobileNavigation.addEventListener(
+		'change',
+		setNavigationState
+	);
+
+	setNavigationState();
 };
 
-/**
- * FAQ accordion.
- */
+/* ==================================================
+   FAQ ACCORDION
+================================================== */
+
 const initFaqAccordion = () => {
-	const faqButtons = document.querySelectorAll(
-		'.faq-question'
-	);
+	const faqButtons =
+		document.querySelectorAll(
+			'.faq-question'
+		);
 
 	faqButtons.forEach((button) => {
-		button.addEventListener('click', () => {
-			const faqItem = button.closest('.faq-item');
-			const answer = faqItem?.querySelector(
-				'.faq-answer'
-			);
+		button.addEventListener(
+			'click',
+			() => {
+				const faqItem =
+					button.closest('.faq-item');
 
-			if (!answer) {
-				return;
+				const answer =
+					faqItem?.querySelector(
+						'.faq-answer'
+					);
+
+				if (!answer) {
+					return;
+				}
+
+				const isOpen =
+					button.getAttribute(
+						'aria-expanded'
+					) === 'true';
+
+				button.setAttribute(
+					'aria-expanded',
+					String(!isOpen)
+				);
+
+				answer.hidden = isOpen;
+
+				faqItem?.classList.toggle(
+					'is-open',
+					!isOpen
+				);
 			}
-
-			const isOpen =
-				button.getAttribute('aria-expanded') === 'true';
-
-			button.setAttribute(
-				'aria-expanded',
-				String(!isOpen)
-			);
-
-			answer.hidden = isOpen;
-			faqItem?.classList.toggle('is-open', !isOpen);
-		});
+		);
 	});
 };
 
-/**
- * Testimonials sliders.
- */
+/* ==================================================
+   TESTIMONIALS SLIDER
+================================================== */
+
 const initTestimonialsSliders = () => {
-	const sliders = document.querySelectorAll(
-		'[data-testimonials-slider]'
-	);
+	const sliders =
+		document.querySelectorAll(
+			'[data-testimonials-slider]'
+		);
 
 	sliders.forEach((slider) => {
-		const section = slider.closest('.testimonials');
+		const section =
+			slider.closest('.testimonials');
 
-		const viewport = slider.querySelector(
-			'[data-slider-viewport]'
-		);
+		const viewport =
+			slider.querySelector(
+				'[data-slider-viewport]'
+			);
 
-		const track = slider.querySelector(
-			'[data-slider-track]'
-		);
+		const track =
+			slider.querySelector(
+				'[data-slider-track]'
+			);
 
-		const previousButton = slider.querySelector(
-			'[data-slider-prev]'
-		);
+		const previousButton =
+			slider.querySelector(
+				'[data-slider-prev]'
+			);
 
-		const nextButton = slider.querySelector(
-			'[data-slider-next]'
-		);
+		const nextButton =
+			slider.querySelector(
+				'[data-slider-next]'
+			);
 
-		const dotsContainer = section?.querySelector(
-			'[data-slider-dots]'
-		);
+		const dotsContainer =
+			section?.querySelector(
+				'[data-slider-dots]'
+			);
 
 		const slides = track
 			? Array.from(track.children)
@@ -245,18 +287,15 @@ const initTestimonialsSliders = () => {
 			!dotsContainer ||
 			!slides.length
 		) {
-			console.warn(
-				'Testimonials slider markup is incomplete.',
-				slider
-			);
-
 			return;
 		}
 
 		let currentIndex = 0;
-		let slidesPerView = 1;
 		let maximumIndex = 0;
 		let resizeTimer;
+		let pointerStartX = 0;
+		let pointerStartY = 0;
+		let activePointerId = null;
 
 		const getSlidesPerView = () => {
 			if (window.innerWidth <= 640) {
@@ -271,46 +310,54 @@ const initTestimonialsSliders = () => {
 		};
 
 		const getSlideStep = () => {
-			const trackStyles =
+			const styles =
 				window.getComputedStyle(track);
 
 			const gap =
 				Number.parseFloat(
-					trackStyles.columnGap
+					styles.columnGap
 				) ||
 				Number.parseFloat(
-					trackStyles.gap
+					styles.gap
 				) ||
 				0;
 
 			return (
-				slides[0].getBoundingClientRect().width +
+				slides[0]
+					.getBoundingClientRect()
+					.width +
 				gap
 			);
 		};
 
 		const updateDots = () => {
-			const dots = dotsContainer.querySelectorAll(
-				'.testimonials-slider__dot'
-			);
-
-			dots.forEach((dot, index) => {
-				const isActive = index === currentIndex;
-
-				dot.classList.toggle(
-					'is-active',
-					isActive
+			const dots =
+				dotsContainer.querySelectorAll(
+					'.testimonials-slider__dot'
 				);
 
-				if (isActive) {
-					dot.setAttribute(
-						'aria-current',
-						'true'
+			dots.forEach(
+				(dot, index) => {
+					const active =
+						index === currentIndex;
+
+					dot.classList.toggle(
+						'is-active',
+						active
 					);
-				} else {
-					dot.removeAttribute('aria-current');
+
+					if (active) {
+						dot.setAttribute(
+							'aria-current',
+							'true'
+						);
+					} else {
+						dot.removeAttribute(
+							'aria-current'
+						);
+					}
 				}
-			});
+			);
 		};
 
 		const updateButtons = () => {
@@ -323,7 +370,8 @@ const initTestimonialsSliders = () => {
 
 		const updateSlider = () => {
 			const offset =
-				currentIndex * getSlideStep();
+				currentIndex *
+				getSlideStep();
 
 			track.style.transform =
 				`translate3d(-${offset}px, 0, 0)`;
@@ -341,9 +389,12 @@ const initTestimonialsSliders = () => {
 				index += 1
 			) {
 				const dot =
-					document.createElement('button');
+					document.createElement(
+						'button'
+					);
 
 				dot.type = 'button';
+
 				dot.className =
 					'testimonials-slider__dot';
 
@@ -352,21 +403,28 @@ const initTestimonialsSliders = () => {
 					`Show testimonial group ${index + 1}`
 				);
 
-				dot.addEventListener('click', () => {
-					currentIndex = index;
-					updateSlider();
-				});
+				dot.addEventListener(
+					'click',
+					() => {
+						currentIndex = index;
+						updateSlider();
+					}
+				);
 
-				dotsContainer.appendChild(dot);
+				dotsContainer.appendChild(
+					dot
+				);
 			}
 		};
 
 		const recalculateSlider = () => {
-			slidesPerView = getSlidesPerView();
+			const slidesPerView =
+				getSlidesPerView();
 
 			maximumIndex = Math.max(
 				0,
-				slides.length - slidesPerView
+				slides.length -
+					slidesPerView
 			);
 
 			currentIndex = Math.min(
@@ -396,7 +454,10 @@ const initTestimonialsSliders = () => {
 		nextButton.addEventListener(
 			'click',
 			() => {
-				if (currentIndex === maximumIndex) {
+				if (
+					currentIndex ===
+					maximumIndex
+				) {
 					return;
 				}
 
@@ -405,22 +466,110 @@ const initTestimonialsSliders = () => {
 			}
 		);
 
-		window.addEventListener('resize', () => {
-			window.clearTimeout(resizeTimer);
+		viewport.addEventListener(
+	'pointerdown',
+	(event) => {
+		// Keep normal mouse behaviour on laptops/desktops.
+		if (event.pointerType === 'mouse') {
+			return;
+		}
 
-			resizeTimer = window.setTimeout(
-				recalculateSlider,
-				150
+		activePointerId = event.pointerId;
+		pointerStartX = event.clientX;
+		pointerStartY = event.clientY;
+
+		viewport.setPointerCapture(
+			event.pointerId
+		);
+	}
+);
+
+	viewport.addEventListener(
+		'pointerup',
+		(event) => {
+			if (
+				event.pointerId !==
+				activePointerId
+			) {
+				return;
+			}
+
+			const distanceX =
+				event.clientX -
+				pointerStartX;
+
+			const distanceY =
+				event.clientY -
+				pointerStartY;
+
+			const threshold = Math.min(
+				60,
+				viewport.clientWidth * 0.15
 			);
+
+			// Ignore taps and mostly vertical gestures.
+			if (
+				Math.abs(distanceX) <
+					threshold ||
+				Math.abs(distanceX) <=
+					Math.abs(distanceY)
+			) {
+				activePointerId = null;
+				return;
+			}
+
+			// Swipe left → next review.
+			if (
+				distanceX < 0 &&
+				currentIndex < maximumIndex
+			) {
+				currentIndex += 1;
+				updateSlider();
+			}
+
+			// Swipe right → previous review.
+			if (
+				distanceX > 0 &&
+				currentIndex > 0
+			) {
+				currentIndex -= 1;
+				updateSlider();
+			}
+
+			activePointerId = null;
+		}
+	);
+
+	viewport.addEventListener(
+		'pointercancel',
+		() => {
+			activePointerId = null;
+		}
+	);
+
+			window.addEventListener(
+				'resize',
+				() => {
+					window.clearTimeout(
+						resizeTimer
+					);
+
+					resizeTimer =
+						window.setTimeout(
+							recalculateSlider,
+							150
+						);
+				}
+			);
+
+			recalculateSlider();
 		});
+	};
 
-		recalculateSlider();
-	});
-};
+/* ==================================================
+   INITIALIZE
+================================================== */
 
-/**
- * Initialize theme scripts.
- */
 const initThemeScripts = () => {
 	initMobileNavigation();
 	initFaqAccordion();

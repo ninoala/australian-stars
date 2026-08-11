@@ -1,6 +1,8 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+$nav-desktop: 80rem; // 1280px
+
 :root {
 	--header-height: 4.75rem;
 }
@@ -36,7 +38,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 2rem;
+	gap: 1rem;
 
 	min-height: var(--header-height);
 }
@@ -46,7 +48,7 @@
 ================================================== */
 
 .site-header__brand {
-	flex-shrink: 0;
+	flex: 0 0 auto;
 }
 
 .custom-logo-link {
@@ -58,7 +60,7 @@
 .custom-logo {
 	display: block;
 
-	width: 11rem;
+	width: 9.5rem;
 	height: auto;
 	max-height: 3rem;
 
@@ -74,149 +76,374 @@
 }
 
 /* ==================================================
-   DESKTOP NAVIGATION
+   HAMBURGER
+   Default state: mobile + tablet.
 ================================================== */
 
-.primary-navigation {
-	margin-left: auto;
-}
+.site-header button.nav-toggle {
+	position: relative;
 
-.primary-navigation__drawer-header,
-.primary-navigation__mobile-cta,
-.primary-navigation__close {
-	display: none;
-}
+	flex: 0 0 auto;
 
-.primary-navigation__menu {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	gap: clamp(1.25rem, 2.5vw, 2.5rem);
-
-	margin: 0;
-	padding: 0;
-
-	list-style: none;
-
-	li {
-		position: relative;
-
-		margin: 0;
-	}
-
-	a {
-		display: inline-flex;
-		align-items: center;
-
-		min-height: 2.75rem;
-
-		color: $color-text;
-
-		font-size: 0.95rem;
-		font-weight: 600;
-		text-decoration: none;
-
-		transition: color $transition-default;
-
-		&:hover,
-		&:focus-visible {
-			color: $color-primary;
-		}
-
-		&:focus-visible {
-			outline: 0.15rem solid $color-primary;
-			outline-offset: 0.2rem;
-			border-radius: 0.2rem;
-		}
-	}
-
-	.current-menu-item > a,
-	.current_page_item > a {
-		color: $color-primary;
-	}
-
-	.current-menu-item > a::after,
-	.current_page_item > a::after {
-		content: '';
-
-		position: absolute;
-		right: 0;
-		bottom: 0.25rem;
-		left: 0;
-
-		height: 0.15rem;
-
-		background-color: $color-primary;
-		border-radius: 999px;
-	}
-}
-
-/* ==================================================
-   DESKTOP CTA
-================================================== */
-
-.site-header__cta {
-	display: none;
-	flex-shrink: 0;
-
-	@include tablet {
-		display: inline-flex;
-	}
-}
-
-/* ==================================================
-   MOBILE TOGGLE
-================================================== */
-
-.nav-toggle {
-	display: none;
+	justify-content: center;
+	gap: 0.3rem;
 
 	width: 3rem;
 	height: 3rem;
+	margin: 0 0 0 auto;
 	padding: 0;
 
-	background-color: rgba(47, 70, 52, 0.9);
-	border: 1px solid rgba(255, 255, 255, 0.55);
+	appearance: none;
+
+	background: #fffdf8 !important;
+	background-color: #fffdf8 !important;
+	border: 1px solid rgba(255, 255, 255, 0.8) !important;
 	border-radius: $radius-small;
+
+	color: $color-primary !important;
+
+	box-shadow: 0 0.3rem 1rem rgba(24, 32, 44, 0.16);
 
 	cursor: pointer;
 
-	box-shadow: 0 0.25rem 0.75rem rgba(24, 32, 44, 0.12);
-
 	transition:
 		background-color $transition-default,
-		border-color $transition-default;
+		border-color $transition-default,
+		transform $transition-default;
 
 	&:hover {
-		background-color: $color-primary;
-		border-color: $color-background;
+		background: #ffffff !important;
+		background-color: #ffffff !important;
+		border-color: #ffffff !important;
+
+		transform: translateY(-0.1rem);
 	}
 
 	&:focus-visible {
-		outline: 0.2rem solid $color-background;
+		outline: 0.2rem solid #ffffff;
 		outline-offset: 0.2rem;
 	}
+}
 
-	> span {
-		display: block;
+.site-header
+	button.nav-toggle
+	.nav-toggle__line {
+	display: block;
 
-		width: 1.4rem;
-		height: 0.125rem;
+	width: 1.4rem !important;
+	height: 0.14rem !important;
 
-		background-color: $color-background;
-		border-radius: 999px;
-	}
+	background: $color-primary !important;
+	background-color: $color-primary !important;
+	border-radius: 999px;
 }
 
 /* ==================================================
    BACKDROP
 ================================================== */
 
-.nav-backdrop {
-	display: none;
+.site-header .nav-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 1100;
+
+	display: block;
+
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+
+	appearance: none;
+
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+
+	background: rgba(18, 25, 20, 0.58);
+	border: 0;
+	border-radius: 0;
+
+	cursor: pointer;
+
+	transition:
+		opacity $transition-default,
+		visibility $transition-default;
+}
+
+.site-header .nav-backdrop.is-visible {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
 }
 
 body.nav-open {
 	overflow: hidden;
+}
+
+/* ==================================================
+   MOBILE / TABLET DRAWER
+================================================== */
+
+.site-header .primary-navigation {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1200;
+
+	display: flex;
+	flex-direction: column;
+
+	width: min(88vw, 23rem);
+	height: 100vh;
+	height: 100dvh;
+	margin: 0;
+	padding: 0;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+
+	visibility: hidden;
+	pointer-events: none;
+
+	background: $color-background;
+	border: 0;
+	border-right: 1px solid $color-border;
+	border-radius: 0;
+
+	box-shadow: 1rem 0 2.5rem rgba(24, 32, 44, 0.22);
+
+	transform: translateX(-105%);
+
+	transition:
+		transform 0.35s ease,
+		visibility 0.35s ease;
+}
+
+.site-header .primary-navigation.is-open {
+	visibility: visible;
+	pointer-events: auto;
+
+	transform: translateX(0);
+}
+
+/* ==================================================
+   DRAWER HEADER
+================================================== */
+
+.primary-navigation__drawer-header {
+	flex: 0 0 auto;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+
+	min-height: var(--header-height);
+	padding: 0 1.25rem;
+
+	background: $color-background;
+	border-bottom: 1px solid $color-border;
+}
+
+.primary-navigation__drawer-logo {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.primary-navigation__drawer-logo .custom-logo {
+	width: 9.5rem;
+}
+
+/* ==================================================
+   DRAWER CLOSE BUTTON
+================================================== */
+
+.primary-navigation__close {
+	position: relative;
+
+	flex: 0 0 auto;
+
+	display: block;
+
+	width: 2.75rem;
+	height: 2.75rem;
+	margin: 0;
+	padding: 0;
+
+	appearance: none;
+
+	background: $color-background-soft;
+	border: 1px solid $color-border;
+	border-radius: $radius-small;
+
+	cursor: pointer;
+
+	transition:
+		background-color $transition-default,
+		border-color $transition-default;
+}
+
+.primary-navigation__close:hover {
+	background: $color-background;
+	border-color: $color-primary;
+}
+
+.primary-navigation__close:focus-visible {
+	outline: 0.2rem solid $color-primary;
+	outline-offset: 0.15rem;
+}
+
+.primary-navigation__close-line {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	display: block;
+
+	width: 1.25rem;
+	height: 0.14rem;
+
+	background: $color-primary;
+	border-radius: 999px;
+}
+
+.primary-navigation__close-line:first-child {
+	transform:
+		translate(-50%, -50%)
+		rotate(45deg);
+}
+
+.primary-navigation__close-line:last-child {
+	transform:
+		translate(-50%, -50%)
+		rotate(-45deg);
+}
+
+/* ==================================================
+   DRAWER MENU
+================================================== */
+
+.site-header .primary-navigation__menu {
+	flex: 0 0 auto;
+
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 0;
+
+	width: 100%;
+	margin: 0;
+	padding: 1rem 1.25rem 0;
+
+	list-style: none;
+
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.site-header
+	.primary-navigation__menu
+	li {
+	display: block;
+
+	width: 100%;
+	margin: 0;
+
+	border-bottom: 1px solid $color-border;
+}
+
+.site-header
+	.primary-navigation__menu
+	a {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	width: 100%;
+	min-height: 3.65rem;
+	padding: 0.9rem 0.5rem;
+
+	color: $color-text;
+	background: transparent;
+
+	font-size: 1.05rem;
+	font-weight: 600;
+	line-height: 1.25;
+	text-align: left;
+	text-decoration: none;
+
+	border: 0;
+	border-radius: 0;
+
+	transition:
+		color $transition-default,
+		background-color $transition-default,
+		padding-left $transition-default;
+}
+
+.site-header
+	.primary-navigation__menu
+	a:hover,
+.site-header
+	.primary-navigation__menu
+	a:focus-visible {
+	padding-left: 0.85rem;
+
+	color: $color-primary;
+	background: $color-background-soft;
+}
+
+.site-header
+	.primary-navigation__menu
+	a:focus-visible {
+	outline: 0.15rem solid $color-primary;
+	outline-offset: -0.15rem;
+}
+
+.site-header
+	.primary-navigation__menu
+	.current-menu-item
+	> a,
+.site-header
+	.primary-navigation__menu
+	.current_page_item
+	> a {
+	color: $color-primary;
+	background: $color-background-soft;
+}
+
+/* ==================================================
+   DRAWER FREE QUOTE BUTTON
+   Separate from the UL/menu.
+================================================== */
+
+.site-header
+	.primary-navigation
+	.primary-navigation__cta {
+	flex: 0 0 auto;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	width: auto;
+	min-width: 0;
+
+	margin: 0.8rem 1.25rem 1.5rem;
+
+	text-align: left;
+	white-space: normal;
 }
 
 /* ==================================================
@@ -225,347 +452,14 @@ body.nav-open {
 
 .admin-bar.home .site-header,
 .admin-bar.has-transparent-header .site-header {
-	top: 32px;
+	top: 46px;
 }
 
-/* ==================================================
-   MOBILE DRAWER
-================================================== */
-
-@media (max-width: 56rem) {
-	.site-header__inner {
-		gap: 1rem;
-	}
-
-	.custom-logo {
-		width: 9.5rem;
-	}
-
-	.site-header .site-header__cta {
-		display: none;
-	}
-
-	.nav-toggle {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 0.3rem;
-
-		margin-left: auto;
-	}
-
-	/* Page overlay */
-
-	.nav-backdrop {
-		position: fixed;
-		inset: 0;
-		z-index: 1100;
-
-		display: block;
-
-		width: 100%;
-		height: 100%;
-		padding: 0;
-
-		opacity: 0;
-		visibility: hidden;
-		pointer-events: none;
-
-		background-color: rgba(18, 25, 20, 0.58);
-		border: 0;
-		border-radius: 0;
-
-		cursor: pointer;
-
-		transition:
-			opacity $transition-default,
-			visibility $transition-default;
-
-		&.is-visible {
-			opacity: 1;
-			visibility: visible;
-			pointer-events: auto;
-		}
-	}
-
-	/* Rectangular left drawer */
-
-	.site-header .primary-navigation {
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 1200;
-
-		display: flex;
-		flex-direction: column;
-
-		width: min(88vw, 23rem);
-		height: 100vh;
-		height: 100dvh;
-		margin: 0;
-		padding: 0;
-
-		overflow-x: hidden;
-		overflow-y: auto;
-		overscroll-behavior: contain;
-
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-
-		background-color: $color-background;
-		border: 0;
-		border-right: 1px solid $color-border;
-		border-radius: 0;
-
-		box-shadow: 1rem 0 2.5rem rgba(24, 32, 44, 0.22);
-
-		transform: translateX(-105%);
-
-		transition: transform 0.35s ease;
-
-		&.is-open {
-			transform: translateX(0);
-		}
-	}
-
-	/* Drawer logo row */
-
-	.primary-navigation__drawer-header {
-		flex: 0 0 auto;
-
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-
-		min-height: var(--header-height);
-		padding: 0 1.25rem;
-
-		background-color: $color-background;
-		border-bottom: 1px solid $color-border;
-	}
-
-	.primary-navigation__drawer-logo {
-		flex-shrink: 1;
-
-		.custom-logo {
-			width: 9.5rem;
-		}
-
-		.site-title {
-			display: inline-flex;
-			align-items: center;
-
-			min-height: var(--header-height);
-		}
-	}
-
-	.primary-navigation__close {
-		position: relative;
-
-		flex: 0 0 auto;
-
-		display: block;
-
-		width: 2.75rem;
-		height: 2.75rem;
-		padding: 0;
-
-		background-color: $color-background-soft;
-		border: 1px solid $color-border;
-		border-radius: $radius-small;
-
-		cursor: pointer;
-
-		transition:
-			background-color $transition-default,
-			border-color $transition-default;
-
-		&:hover {
-			background-color: $color-background;
-			border-color: $color-primary;
-		}
-
-		&:focus-visible {
-			outline: 0.2rem solid $color-primary;
-			outline-offset: 0.15rem;
-		}
-
-		span {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-
-			width: 1.25rem;
-			height: 0.125rem;
-
-			background-color: $color-primary;
-			border-radius: 999px;
-		}
-
-		span:first-child {
-			transform: translate(-50%, -50%) rotate(45deg);
-		}
-
-		span:last-child {
-			transform: translate(-50%, -50%) rotate(-45deg);
-		}
-	}
-
-	/* Vertical menu */
-
-	.primary-navigation__menu {
-		flex: 0 0 auto;
-
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 0;
-
-		width: auto;
-		max-height: none;
-		margin: 0;
-		padding: 1rem 1.25rem 0;
-
-		overflow: visible;
-
-		background: transparent;
-		border: 0;
-		border-radius: 0;
-		box-shadow: none;
-
-		list-style: none;
-
-		li {
-			width: 100%;
-			margin: 0;
-
-			border-bottom: 1px solid $color-border;
-		}
-
-		a {
-			position: relative;
-
-			display: flex;
-			align-items: center;
-
-			width: 100%;
-			min-height: 3.65rem;
-			padding: 0.9rem 0.5rem;
-
-			color: $color-text;
-			background-color: transparent;
-
-			font-size: 1.05rem;
-			font-weight: 600;
-			text-decoration: none;
-
-			border: 0;
-			border-radius: 0;
-
-			transition:
-				color $transition-default,
-				background-color $transition-default,
-				padding-left $transition-default;
-
-			&:hover,
-			&:focus-visible {
-				padding-left: 0.85rem;
-
-				color: $color-primary;
-				background-color: $color-background-soft;
-			}
-
-			&:focus-visible {
-				outline: 0.15rem solid $color-primary;
-				outline-offset: -0.15rem;
-			}
-		}
-
-		.current-menu-item > a,
-		.current_page_item > a {
-			color: $color-primary;
-			background-color: $color-background-soft;
-		}
-
-		.current-menu-item > a::after,
-		.current_page_item > a::after {
-			display: none;
-		}
-	}
-
-	/* Orange menu-style quote link */
-
-	.primary-navigation .primary-navigation__mobile-cta {
-		flex: 0 0 auto;
-
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-
-		width: auto;
-		min-height: 3.65rem;
-		margin: 0.75rem 1.25rem 1.5rem;
-		padding: 0.9rem 1rem;
-
-		color: $color-background;
-		background-color: $color-accent;
-		border: 0;
-		border-radius: $radius-small;
-
-		font-size: 1.05rem;
-		font-weight: 700;
-		line-height: 1.3;
-		text-align: left;
-		text-decoration: none;
-
-		box-shadow: none;
-
-		transition:
-			background-color $transition-default,
-			color $transition-default;
-
-		&:hover,
-		&:focus-visible {
-			color: $color-background;
-			background-color: $color-primary;
-		}
-
-		&:focus-visible {
-			outline: 0.2rem solid $color-primary;
-			outline-offset: 0.15rem;
-		}
-	}
-}
-
-/* ==================================================
-   ADMIN BAR ON MOBILE
-================================================== */
-
-@media screen and (max-width: 782px) {
-	.admin-bar.home .site-header,
-	.admin-bar.has-transparent-header .site-header {
-		top: 46px;
-	}
-
-	.admin-bar .primary-navigation {
-		top: 46px;
-
-		height: calc(100vh - 46px);
-		height: calc(100dvh - 46px);
-	}
-}
-
-@media screen and (min-width: 783px) and (max-width: 56rem) {
-	.admin-bar .primary-navigation {
-		top: 32px;
-
-		height: calc(100vh - 32px);
-		height: calc(100dvh - 32px);
-	}
+.admin-bar .primary-navigation {
+	top: 46px;
+
+	height: calc(100vh - 46px);
+	height: calc(100dvh - 46px);
 }
 
 /* ==================================================
@@ -581,7 +475,7 @@ body.nav-open {
 		width: 8.5rem;
 	}
 
-	.nav-toggle {
+	.site-header button.nav-toggle {
 		width: 2.75rem;
 		height: 2.75rem;
 	}
@@ -594,17 +488,254 @@ body.nav-open {
 		padding-inline: 1rem;
 	}
 
-	.primary-navigation__drawer-logo .custom-logo {
+	.primary-navigation__drawer-logo
+		.custom-logo {
 		width: 8.5rem;
 	}
 
-	.primary-navigation__menu {
+	.site-header .primary-navigation__menu {
 		padding-inline: 1rem;
 	}
 
-	.primary-navigation .primary-navigation__mobile-cta {
+	.site-header
+		.primary-navigation
+		.primary-navigation__cta {
 		margin-right: 1rem;
 		margin-left: 1rem;
+	}
+}
+
+/* ==================================================
+   WORDPRESS ADMIN BAR — TABLET
+================================================== */
+
+@media screen and (min-width: 48.9375rem) {
+	.admin-bar.home .site-header,
+	.admin-bar.has-transparent-header .site-header {
+		top: 32px;
+	}
+
+	.admin-bar .primary-navigation {
+		top: 32px;
+
+		height: calc(100vh - 32px);
+		height: calc(100dvh - 32px);
+	}
+}
+
+/* ==================================================
+   DESKTOP — 1280px+
+================================================== */
+
+@media screen and (min-width: $nav-desktop) {
+	.site-header__inner {
+		justify-content: flex-start;
+		gap: clamp(1rem, 1.5vw, 1.75rem);
+	}
+
+	.custom-logo {
+		width: 11rem;
+	}
+
+	/* ==================================================
+	   HIDE MOBILE CONTROLS
+	================================================== */
+
+	.site-header button.nav-toggle,
+	.site-header .nav-backdrop {
+		display: none !important;
+	}
+
+	/* ==================================================
+	   NAV WRAPPER
+
+	   This NEVER receives the white bubble.
+	================================================== */
+
+	.site-header .primary-navigation {
+		position: static;
+		top: auto;
+		right: auto;
+		bottom: auto;
+		left: auto;
+
+		flex: 1 1 auto;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 1rem;
+
+		width: auto;
+		height: auto;
+		margin: 0 0 0 auto;
+		padding: 0;
+
+		overflow: visible;
+
+		visibility: visible;
+		pointer-events: auto;
+
+		background: transparent !important;
+		background-color: transparent !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+
+		box-shadow: none !important;
+
+		transform: none;
+	}
+
+	/* Drawer-only elements */
+
+	.primary-navigation__drawer-header,
+	.primary-navigation__close {
+		display: none;
+	}
+
+	/* ==================================================
+	   DESKTOP MENU BUBBLE
+
+	   ONLY .primary-navigation__menu gets this.
+	================================================== */
+
+	.site-header .primary-navigation__menu {
+		flex: 0 0 auto;
+
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
+		justify-content: center;
+		gap: 0.1rem;
+
+		width: auto;
+		margin: 0;
+		padding: 0.35rem;
+
+		list-style: none;
+
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid rgba(24, 32, 44, 0.08);
+		border-radius: 999px;
+
+		box-shadow:
+			0 0.4rem 1.5rem
+			rgba(24, 32, 44, 0.09);
+	}
+
+	.site-header
+		.primary-navigation__menu
+		li {
+		flex: 0 0 auto;
+
+		display: flex;
+		align-items: stretch;
+		justify-content: center;
+
+		width: auto;
+		margin: 0;
+
+		border: 0;
+	}
+
+	.site-header
+		.primary-navigation__menu
+		a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: auto;
+		min-height: 3rem;
+		padding:
+			0.55rem
+			clamp(0.55rem, 0.8vw, 0.9rem);
+
+		color: $color-text;
+		background: transparent;
+
+		font-size: 0.88rem;
+		font-weight: 600;
+		line-height: 1.1;
+		text-align: center;
+		white-space: nowrap;
+		text-decoration: none;
+
+		border: 0;
+		border-radius: 999px;
+
+		transition:
+			color $transition-default,
+			background-color $transition-default;
+	}
+
+	.site-header
+		.primary-navigation__menu
+		a:hover,
+	.site-header
+		.primary-navigation__menu
+		a:focus-visible {
+		padding:
+			0.55rem
+			clamp(0.55rem, 0.8vw, 0.9rem);
+
+		color: $color-primary;
+		background: $color-background-soft;
+	}
+
+	.site-header
+		.primary-navigation__menu
+		a:focus-visible {
+		outline: 0.15rem solid $color-primary;
+		outline-offset: 0.1rem;
+	}
+
+	.site-header
+		.primary-navigation__menu
+		.current-menu-item
+		> a,
+	.site-header
+		.primary-navigation__menu
+		.current_page_item
+		> a {
+		color: $color-primary;
+		background: $color-background-soft;
+	}
+
+	/* ==================================================
+	   DESKTOP FREE QUOTE
+
+	   A sibling of the UL.
+	   Separate from white menu bubble.
+	================================================== */
+
+	.site-header
+		.primary-navigation
+		.primary-navigation__cta {
+		position: relative;
+		z-index: 1;
+
+		flex: 0 0 auto;
+
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		width: auto;
+
+		margin: 0 0 0 0.25rem;
+
+		text-align: center;
+		white-space: nowrap;
+	}
+
+	/* Reset admin-bar drawer positioning */
+
+	.admin-bar .primary-navigation {
+		top: auto;
+
+		height: auto;
 	}
 }
 
@@ -614,7 +745,8 @@ body.nav-open {
 
 @media (prefers-reduced-motion: reduce) {
 	.site-header .primary-navigation,
-	.nav-backdrop {
+	.site-header .nav-backdrop,
+	.site-header .nav-toggle {
 		transition: none;
 	}
 }

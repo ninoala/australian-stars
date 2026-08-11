@@ -18,6 +18,9 @@
 
 	&__viewport {
 		overflow: hidden;
+		min-width: 0;
+		touch-action: pan-y;
+
 	}
 
 	&__track {

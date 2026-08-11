@@ -141,4 +141,51 @@ $testimonials = [
 
 		<div class="testimonials-slider__dots" data-slider-dots></div>
 	</div>
+
+	<div class="testimonials__cta-banner">
+
+	<div class="testimonials__cta-content">
+
+		<p class="testimonials__cta-eyebrow">
+			<?php
+			esc_html_e(
+				'Ready for sparkling results?',
+				'australian-stars'
+			);
+			?>
+		</p>
+
+		<h3>
+			<?php
+			esc_html_e(
+				'Let’s make your property shine.',
+				'australian-stars'
+			);
+			?>
+		</h3>
+
+		<p class="testimonials__cta-description">
+			<?php
+			esc_html_e(
+				'Get in touch today for a free, no-obligation quote.',
+				'australian-stars'
+			);
+			?>
+		</p>
+
+		</div>
+
+			<a
+				class="testimonials__cta-button"
+				href="<?php echo esc_url( home_url( '/free-quote/' ) ); ?>"
+			>
+				<?php
+				esc_html_e(
+					'Get Your Free Quote',
+					'australian-stars'
+				);
+				?>
+			</a>
+
+	</div>
 </section>
