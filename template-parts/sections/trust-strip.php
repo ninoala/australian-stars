@@ -21,9 +21,9 @@
 
 			>
 
-			<h3 class="trust-strip__title">
+			<p class="trust-strip__title">
 				Eco-Friendly
-			</h3>
+			</p>
 
 			<p class="trust-strip__description">
 				Safe for your family, pets, &amp; environment.
@@ -43,9 +43,9 @@
 				alt=""
 			>
 
-			<h3 class="trust-strip__title">
+			<p class="trust-strip__title">
 				100% Satisfaction
-			</h3>
+			</p>
 
 			<p class="trust-strip__description">
 				We stand by our work on every clean.
@@ -65,9 +65,9 @@
 				alt=""
 			>
 
-			<h3 class="trust-strip__title">
+			<p class="trust-strip__title">
 				Reliable &amp; On Time
-			</h3>
+			</p>
 
 			<p class="trust-strip__description">
 				Punctual, professional, &amp; easy to deal with.
@@ -87,9 +87,9 @@
 				height="48"
 			>
 
-			<h3 class="trust-strip__title">
+			<p class="trust-strip__title">
 				Streak-Free Guarantee
-			</h3>
+			</p>
 
 			<p class="trust-strip__description">
 				Immaculate results every single time.

@@ -10,7 +10,7 @@ get_header();
 $theme_uri    = get_template_directory_uri();
 $phone_label  = '0436 341 757';
 $phone_number = '+61436341757';
-$email        = 'hello@australianpropertystars.com';
+$email        = 'vasily@auspropertystars.com';
 $whatsapp_number = '61436341757';
 
 $whatsapp_url = 'https://wa.me/' . $whatsapp_number

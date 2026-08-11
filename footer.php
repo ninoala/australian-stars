@@ -27,6 +27,10 @@ $quick_links = [
 		'url'   => home_url( '/#reviews' ),
 	],
 	[
+		'label' => __( 'Blog', 'australian-stars' ),
+		'url'   => home_url( '/blog/' ),
+	],
+	[
 		'label' => __( 'Free Quote', 'australian-stars' ),
 		'url'   => home_url( '/free-quote/' ),
 	],
@@ -34,7 +38,7 @@ $quick_links = [
 
 $phone_display = '0436 341 757';
 $phone_link    = '+61436341757';
-$email         = 'hello@australianpropertystars.com';
+$email         = 'vasily@auspropertystars.com';
 $location      = __( 'Palmview, Queensland, Australia', 'australian-stars' );
 
 $whatsapp_number = '61436341757';

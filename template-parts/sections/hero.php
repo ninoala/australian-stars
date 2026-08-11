@@ -79,7 +79,7 @@
 
 			<p class="hero__description">
 				<?php esc_html_e(
-					'Professional care for your home or property, delivering sparkling results you can see and trust.',
+					'Professional interior and exterior window cleaning for homes and businesses across the Sunshine Coast and Hinterland.',
 					'australian-stars'
 				); ?>
 			</p>
@@ -99,7 +99,7 @@
 
 				<a
 					class="hero__phone button--outline-light"
-					href="tel:+610436341757"
+					href="tel:+61436341757"
 					aria-label="<?php esc_attr_e(
 						'Call Australian Property Stars',
 						'australian-stars'

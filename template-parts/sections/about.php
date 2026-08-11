@@ -79,7 +79,7 @@ $icon_uri  = $image_uri . 'icons/';
 
 			<p class="split-layout__description">
 				<?php esc_html_e(
-					'At Australian Property Stars, we specialise in residential and commercial window cleaning across the Sunshine Coast and Hinterland. We take pride in every job and work hard to deliver outstanding results, backed by our 100% workmanship guarantee.',
+					'At Australian Property Stars, we specialise in residential and commercial interior and exterior window cleaning across the Sunshine Coast and Hinterland. We take pride in every job and work hard to deliver outstanding results, backed by our 100% workmanship guarantee.',
 					'australian-stars'
 				); ?>
 			</p>

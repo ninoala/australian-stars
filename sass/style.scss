@@ -25,6 +25,8 @@ Text Domain: australian-stars
 @use 'components/faq';
 @use 'components/testimonials';
 
+@use 'pages/blog';
 @use 'pages/home';
 @use 'pages/free-quote';
 @use 'pages/service';
+@use 'pages/single-post';
