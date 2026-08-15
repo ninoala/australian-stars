@@ -439,3 +439,46 @@ add_filter(
 	10,
 	2
 );
+
+/**
+ * Redirect legacy blog URLs from the previous website.
+ */
+function australian_stars_legacy_redirects() {
+
+	$request_path = isset( $_SERVER['REQUEST_URI'] )
+		? wp_parse_url(
+			sanitize_text_field(
+				wp_unslash( $_SERVER['REQUEST_URI'] )
+			),
+			PHP_URL_PATH
+		)
+		: '';
+
+	$request_path = untrailingslashit( $request_path );
+
+	$redirects = [
+		'/f/when-did-people-start-cleaning-windows'
+			=> '/when-did-people-start-cleaning-windows/',
+
+		'/f/diy-window-cleaning'
+			=> '/diy-window-cleaning/',
+
+		'/f/how-much-does-it-cost-to-get-your-windows-cleaned-in-brisbane'
+			=> '/window-cleaning-cost-sunshine-coast/',
+	];
+
+	if ( isset( $redirects[ $request_path ] ) ) {
+
+		wp_safe_redirect(
+			home_url( $redirects[ $request_path ] ),
+			301
+		);
+
+		exit;
+	}
+}
+
+add_action(
+	'template_redirect',
+	'australian_stars_legacy_redirects'
+);

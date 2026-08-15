@@ -10,15 +10,15 @@ get_header();
 $service = [
 	'hero' => [
 		'eyebrow' => __(
-			'Interior & Exterior Window Cleaning',
+			'Residential & Commercial Window Cleaning',
 			'australian-stars'
 		),
 		'title' => __(
-			'Brighter Views Start With Cleaner Windows',
+			'Interior & Exterior Window Cleaning on the Sunshine Coast',
 			'australian-stars'
 		),
 		'description' => __(
-			'Professional interior and exterior window cleaning for homes and businesses across the Sunshine Coast & Hinterland.',
+			'Professional window cleaning for homes and businesses across the Sunshine Coast & Hinterland.',
 			'australian-stars'
 		),
 		'image' => [
@@ -44,7 +44,7 @@ $service = [
 		),
 		'paragraphs' => [
 			__(
-				'Clean windows can completely change the appearance and feel of your property. Australian Property Stars provides professional interior and exterior window cleaning for homes and businesses across the Sunshine Coast and Hinterland, helping remove dust, salt, dirt, fingerprints, water marks, cobwebs and everyday build-up.',
+				'Clean windows can completely change the appearance and feel of your property. Australian Property Stars provides professional interior and exterior window cleaning for homes and businesses across the Sunshine Coast and Hinterland, helping remove dust, salt, dirt, fingerprints, watermarks, cobwebs and everyday build-up.',
 				'australian-stars'
 			),
 

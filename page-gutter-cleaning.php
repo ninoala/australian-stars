@@ -10,15 +10,15 @@ get_header();
 $service = [
 	'hero' => [
 		'eyebrow' => __(
-			'Professional Gutter Cleaning',
+			'Residential & Commercial Gutter Cleaning',
 			'australian-stars'
 		),
 		'title' => __(
-			'Protect Your Property With Clean, Free-Flowing Gutters',
+			'Gutter Cleaning on the Sunshine Coast',
 			'australian-stars'
 		),
 		'description' => __(
-			'Professional gutter cleaning for homes and businesses across the Sunshine Coast.',
+			'Professional gutter cleaning for homes and businesses across the Sunshine Coast & Hinterland.',
 			'australian-stars'
 		),
 		'image' => [
@@ -52,7 +52,7 @@ $service = [
 				'australian-stars'
 			),
 			__(
-				'Australian Property Stars provides careful gutter cleaning for homes and businesses across the Sunshine Coast. We remove built-up debris, check accessible drainage areas, and leave the immediate work area tidy so your guttering can continue doing its job properly.',
+				'Australian Property Stars provides careful gutter cleaning for homes and businesses across the Sunshine Coast and Hinterland. We remove built-up debris, check accessible drainage areas, and leave the immediate work area tidy so your guttering can continue doing its job properly.',
 				'australian-stars'
 			),
 		],

@@ -10,15 +10,15 @@ get_header();
 $service = [
 	'hero' => [
 		'eyebrow' => __(
-			'Professional Pressure Washing',
+			'Residential & Commercial Pressure Washing',
 			'australian-stars'
 		),
 		'title' => __(
-			'Restore the Look of Your Outdoor Surfaces',
+			'Pressure Washing on the Sunshine Coast',
 			'australian-stars'
 		),
 		'description' => __(
-			'Professional pressure washing for homes and businesses across the Sunshine Coast.',
+			'Professional pressure washing for homes and businesses across the Sunshine Coast & Hinterland.',
 			'australian-stars'
 		),
 		'image' => [
@@ -52,7 +52,7 @@ $service = [
 				'australian-stars'
 			),
 			__(
-				'Australian Property Stars uses professional equipment and cleaning methods suited to the surface being treated. We work carefully around walls, gardens, doors, and surrounding areas to achieve an even, thorough clean while treating your property with respect.',
+				'Australian Property Stars uses professional equipment and cleaning methods suited to each surface being treated.',
 				'australian-stars'
 			),
 		],

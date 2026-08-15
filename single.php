@@ -26,7 +26,7 @@ get_header();
 					<p class="section-eyebrow">
 						<?php
 						esc_html_e(
-							'Tips & Advice',
+							'Australian Property Stars Blog',
 							'australian-stars'
 						);
 						?>

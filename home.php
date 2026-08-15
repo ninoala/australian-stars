@@ -24,24 +24,29 @@ $blog_title    = $posts_page_id
 			<p class="section-eyebrow">
 				<?php
 				esc_html_e(
-					'Tips & Advice',
+					'Australian Property Stars Blog',
 					'australian-stars'
 				);
 			?>
 			</p>
 
 			<h1 id="blog-heading">
-				<?php echo esc_html( $blog_title ); ?>
-			</h1>
+                <?php
+                esc_html_e(
+                    'Cleaning Tips & Property Care Advice',
+                    'australian-stars'
+                );
+                ?>
+            </h1>
 
 			<p class="blog-hero__description">
-				<?php
-					esc_html_e(
-						'Helpful cleaning tips, property care advice and practical information from Australian Property Stars.',
-						'australian-stars'
-					);
-				?>
-			</p>
+                <?php
+                esc_html_e(
+                    'Practical advice on window cleaning, gutter care, pressure washing and maintaining your property across the Sunshine Coast.',
+                    'australian-stars'
+                );
+                ?>
+            </p>
 
 		</div>
 	</section>

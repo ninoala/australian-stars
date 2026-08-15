@@ -47,7 +47,7 @@ $form_status = isset( $_GET['quote-status'] )
 
 				<p class="quote-page__intro">
 					<?php esc_html_e(
-						'Tell us a little about your property and the service you need. We’ll get back to you with a clear, no-obligation quote.',
+						'Tell us a little about your property and whether you need window cleaning, gutter cleaning or pressure washing. We’ll get back to you with a clear, no-obligation quote.',
 						'australian-stars'
 					); ?>
 				</p>
